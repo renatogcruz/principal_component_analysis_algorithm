@@ -26,7 +26,7 @@ notasfatorial %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Para facilitar, vamos considerar apenas 3 variáveis: as notas da disciplina
 # de finanças; as notas da disciplina de custos; e as notas da disciplina de
