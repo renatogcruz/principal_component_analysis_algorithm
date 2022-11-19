@@ -22,14 +22,14 @@ if(sum(as.numeric(!pacotes %in% installed.packages())) != 0){
 load("notasfatorial.RData")
 
 # O algoritmo prcomp(), do pacote psych, EXIGE que a a matriz de dados fornecida
-# a ele j· esteja padronizada pelo procedimento zscores:
+# a ele j? esteja padronizada pelo procedimento zscores:
 notasfatorial_std <- notasfatorial %>% 
   column_to_rownames("estudante") %>% # transforma as variaveis nominais em nomes de linhas
-  scale() %>%                         # faz a padronizaÁ„o
+  scale() %>%                         # faz a padroniza??o
   data.frame()                        # converte o banco em um dataframe novamente
 
 # Rodando a PCA:
-afpc <- prcomp(notasfatorial_std) # aula teÛrica se resume nesta ˙nica linha
+afpc <- prcomp(notasfatorial_std) # aula te?rica se resume nesta ?nica linha
 summary(afpc)                     # similar ao .describe() do Pandas
 
 # O objeto afpc possui os seguintes componentes:
@@ -37,15 +37,15 @@ afpc$sdev
 afpc$rotation
 afpc$center
 
-# sdev: corresponde ‡ raiz quadrada dos eigenvalues, ou seja, os desvios-padr„o dos
+# sdev: corresponde ? raiz quadrada dos eigenvalues, ou seja, os desvios-padr?o dos
 # componentes principais.
 
-# rotation: corresponde ‡ matriz de tamanho jxj de eigenvectors, em que j 
+# rotation: corresponde ? matriz de tamanho jxj de eigenvectors, em que j 
 # representa a quantidade de vari√°veis da base de dados.
 
-# center: mÈdias de cada vari·vel utilizadas para ap√≥s a padroniza√ß√£o.
+# center: m?dias de cada vari?vel utilizadas para ap√≥s a padroniza√ß√£o.
 
-# scale: desvios-padr„o de cada vari√°vel utilizadas para a padroniza√ß√£o.
+# scale: desvios-padr?o de cada vari√°vel utilizadas para a padroniza√ß√£o.
 
 #Visualizando os pesos que cada vari√°vel tem em cada componente principal 
 #obtido pela PCA
@@ -61,7 +61,7 @@ data.frame(afpc$rotation) %>%
   theme_bw()
 
 # Scree Plot - apenas ignorar os warnings
-# para escolher quantos fatores ser„o retidos. Mas vamos utilizar critÈrio de kaiser
+# para escolher quantos fatores ser√£o retidos. Mas vamos utilizar crit√©rio de kaiser
 ggplotly(
   fviz_eig(X = afpc,
            ggtheme = theme_bw(), 
@@ -71,7 +71,7 @@ ggplotly(
 )
 
 # Extraindo as Cargas Fatoriais
-k <- sum((afpc$sdev ^ 2) > 1) #n˙mero de vari·veis presentes na base de dados
+k <- sum((afpc$sdev ^ 2) > 1) #n√∫mero de vari√°veis presentes na base de dados
 cargas_fatoriais <- afpc$rotation[, 1:k] %*% diag(afpc$sdev[1:k])
 
 # Visualizando as cargas fatoriais
@@ -91,7 +91,7 @@ data.frame(rowSums(cargas_fatoriais ^ 2)) %>%
                 full_width = T, 
                 font_size = 10)
 
-# RelatÛrio das cargas fatoriais e das comunalidades
+# Relat√≥rio das cargas fatoriais e das comunalidades
 data.frame(cargas_fatoriais) %>%
   rename(F1 = X1,
          F2 = X2) %>%
@@ -133,10 +133,10 @@ scores_fatoriais %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
-
-# Proposta da construÁ„o de um ranking ------------------------------------
+# --
+# Proposta da constru√ß√£o de um ranking ------------------------------------
 
 #Assumindo-se apenas o F1 e F2 como indicadores, calculam-se os scores 
 #fatorias
@@ -153,8 +153,8 @@ F2 <- t(apply(notasfatorial_std, 1, function(x) x * score_D2))
 F1
 F2
 
-#Na constru√ß√£o de rankings no R, devemos efetuar a multiplicaÁ„o por -1, 
-#visto que os scores fatoriais das observaÁıµes mais fortes s√£o, por padr„o, 
+#Na constru√ß√£o de rankings no R, devemos efetuar a multiplica√ß√£o por -1, 
+#visto que os scores fatoriais das observa√ß√µes mais fortes s√£o, por padr√£o, 
 #apresentados acompanhados do sinal de menos.
 F1 <- data.frame(F1) %>%
   mutate(fator1 = rowSums(.) * 1)
@@ -163,7 +163,7 @@ F1 %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 F2 <- data.frame(F2) %>%
   mutate(fator2 = rowSums(.) * -1)
@@ -172,16 +172,17 @@ F2 %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Importando as colunas de fatores F1 e F2
 notasfatorial["Fator1"] <- F1$fator1
 notasfatorial["Fator2"] <- F2$fator2
 
-#Criando um ranking pela soma ponderada dos fatores por sua vari‚ncia
+
+#Criando um ranking pela soma ponderada dos fatores por sua vari?ncia
 #compartilhada:
 
-#Calculando a vari‚ncia compartilhada
+#Calculando a vari?ncia compartilhada
 var_compartilhada <- (afpc$sdev ^ 2/sum(afpc$sdev ^ 2))
 var_compartilhada
 
@@ -195,6 +196,6 @@ notasfatorial %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
-# Fim da parte pr·tica ----------------------------------------------------
+# Fim da parte pr√°tica ----------------------------------------------------
