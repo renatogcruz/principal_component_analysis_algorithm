@@ -26,7 +26,7 @@ atlasambiental %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Analisando as correlações entre variáveis da base de dados atlasambiental
 chart.Correlation(atlasambiental[, 3:11], histogram = TRUE, pch = "+")
@@ -109,7 +109,7 @@ relatorio %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Visualizando os pesos que cada variável tem em cada componente principal 
 # obtido pela PCA
@@ -147,7 +147,7 @@ data.frame(cargas_fatoriais) %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 #Visualizando as Comunalidades
 data.frame(rowSums(cargas_fatoriais ^ 2)) %>%
@@ -155,7 +155,7 @@ data.frame(rowSums(cargas_fatoriais ^ 2)) %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Relatório das cargas fatoriais e das comunalidades
 data.frame(cargas_fatoriais) %>%
@@ -165,7 +165,7 @@ data.frame(cargas_fatoriais) %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Plotagem das Cargas Fatoriais
 data.frame(cargas_fatoriais) %>%
@@ -193,7 +193,7 @@ scores_fatoriais %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 
 # Proposta da construção de um ranking ------------------------------------
@@ -209,7 +209,7 @@ F1 %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 #Na construção de rankings no R, devemos efetuar a multiplicação por -1, 
 #visto que os scores fatoriais das observações mais fortes são, por padrão, 
@@ -221,7 +221,7 @@ F1 %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 #Importando a coluna referente ao fator F1:
 atlasambiental["fator1"] <- F1$fator1
@@ -238,7 +238,7 @@ atlasambiental %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 #Carregando o mapa
 load(file = "mapa_sp.RData")
@@ -281,7 +281,7 @@ percepcao_lojas %>%
   kable() %>%
   kable_styling(bootstrap_options = "striped", 
                 full_width = T, 
-                font_size = 12)
+                font_size = 10)
 
 # Analisando as correlações entre variáveis da base de dados percepcao_lojas
 chart.Correlation(percepcao_lojas, histogram = TRUE)
